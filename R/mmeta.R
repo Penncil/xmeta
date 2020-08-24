@@ -1,3 +1,25 @@
+#' Methods for multiviarate random-effects meta-analysis
+#'
+#' @param data dataset
+#' @param rhow within-study correlation
+#' @param type either "continuous" or "binary", indicating the type of outcomes. 
+#' @param k integer indicating the number of outcomes
+#' @param method either "nn.reml", "nn.cl", "nn.mom", "nn.rs", "bb.cl", "bn.cl", "tb.cl" or "tn.cl", indicating the estimation method.
+#' @return res
+#' @examples
+#' data(prostate)^M
+#' fit.nn=mmeta(data=prostate, type="continuous", k=2, method="nn.cl") ^M
+#' summary(fit.nn)
+#' rhow=runif(dim(prostate)[1], -0.2, 0.8)
+#' fit.reml=mmeta(data=prostate, rhow=rhow, type="continuous", k=2, method="nn.reml")
+#' print(fit.reml)
+#' data(nat2)^M
+#' fit.bb=mmeta(data=nat2, type="binary", k=2, method="bb.cl") ^M
+#' summary(fit.bb)^M
+#' data(ca125)^M
+#' fit.tb=mmeta(data=ca125, type="binary", k=2, method="tb.cl") ^M
+#' summary(fit.tb)^M
+
 mmeta <-
   function(data, rhow, type, k, method) {
     
