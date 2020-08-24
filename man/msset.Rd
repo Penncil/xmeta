@@ -18,9 +18,9 @@ msset(data, nm.y1, nm.s1, nm.y2, nm.s2, method, type, k)
 }
 \details{
 This function returns the test statistics for testing small study effects of multivariate
-meta-analysis using regression method.}
+meta-analysis using regression method.} 
 \section{A score test for detecting small study effects in multivariate meta-analysis}{
-Small study effects occur when smaller studies show different, often larger, treatment effects than large ones, which may threaten the validity of systematic reviews and meta-analyses. Detecting small study effects in a multivariate meta-analysis setting remains an untouched research area. Hong et al. (2019) propose a pseudolikelihood-based score test for detecting small study effects in multivariate random-effects meta-analysis.
+Small study effects occur when smaller studies show different, often larger, treatment effects than large ones, which may threaten the validity of systematic reviews and meta-analyses. Detecting small study effects in a multivariate meta-analysis setting remains an untouched research area. Hong et al. (2019) propose a pseudolikelihood-based score test for detecting small study effects in multivariate random-effects meta-analysis. 
 This is the first test for detecting small study effects in multivariate meta-analysis setting.
 }
 
@@ -29,11 +29,11 @@ This is the first test for detecting small study effects in multivariate meta-an
 }
 \references{Hong, C., Salanti, G., Morton, S., Riley, R., Chu, H., Kimmel, S.E. and Chen Y. (2019). Testing small study effects in multivariate meta-analysis (Biometrics).
 }
-\author{Chuan Hong, Yong Chen}
+\author{Chuan Hong}
 
 \examples{
 data(prostate)
-fit.msset=msset(data=prostate, nm.y1="y1", nm.s1="s1", nm.y2="y2", nm.s2="s2",
+fit.msset=msset(data=prostate, nm.y1="y1", nm.s1="s1", nm.y2="y2", nm.s2="s2", 
 method = "nn.cl", type = "continuous", k=2)
 summary(fit.msset)
 }

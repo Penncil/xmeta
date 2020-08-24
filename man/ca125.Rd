@@ -21,10 +21,9 @@
 
 
 \references{
-Chen, Y., Liu, Y., Chu, H., Lee, M. and Schmid C. (2015). A simple and robust method for multivariate meta-analysis of diagnostic test accuracy, Statistics in Medicine (under revision). 
+Chen, Y., Liu, Y., Chu, H., Lee, M. and Schmid, C. (2017) A simple and robust method for multivariate meta-analysis of diagnostic test accuracy, Statistics in Medicine, 36, 105-121.
 
-Gu P, Pan L, Wu S, Sun L, Huang G. CA 125, PET alone, PET-CT, CT and MRI in diagnosing recurrent ovarian carcinoma: a
-systematic review and meta-analysis. European journal of radiology 2009; 71(1):164-174.
+Gu P, Pan L, Wu S, Sun L, Huang G. CA 125, PET alone, PET-CT, CT and MRI in diagnosing recurrent ovarian carcinoma: a systematic review and meta-analysis. European journal of radiology 2009; 71(1):164-174.
 }
 
 
