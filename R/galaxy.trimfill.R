@@ -42,7 +42,68 @@
 #'          
 #' @references Luo C, Marks-Anglin AK, Duan R, Lin L, Hong C, Chu H, Chen Y. Accounting for small-study effects 
 #'                using a bivariate trim and fill meta-analysis procedure. medRxiv. 2020 Jan 1.
-#' @examples
+#' @examples 
+#' # require(mvtnorm)
+#' require(MASS)
+#' require(mvmeta)
+#' require(metafor)
+#' set.seed(123)
+#' mydata <- dat.gen(m.o=50, m.m=20,       # # observed studies, # missing studies
+#'                   s.m= c(0.5, 0.5),     #  c(mean(s1), mean(s2))
+#'                   a.sps=1, b.sps=1, sps='3', # suppress line direction 
+#'                   mybeta=c(2,2),        # true effect size
+#'                   tau.sq=c(0.1, 0.1),   # true between-study var
+#'                   rho.w=0.5, rho.b=0.5, # true within-study and between-study corr
+#'                   s.min = 0.1,          # s1i ~ Unif(s.min, 2*s.m[1]-s.min) 
+#'                   verbose = T)
+#' 
+#' y1 <- mydata$mydat.sps$y1
+#' y2 <- mydata$mydat.sps$y2
+#' v1 <- mydata$mydat.sps$s1.sq
+#' v2 <- mydata$mydat.sps$s2.sq
+#' 
+#' ## unadjusted est 
+#' mv_obs <- mvmeta(cbind(y1, y2), cbind(v1, v2), method='mm')
+#' c(mv_obs$coef)
+#' # 2.142687 2.237741
+
+
+#' estimator <- 'R0' 
+#' ## univariate T&F based on y1 or y2
+#' y1.rma <- rma(y1, v1, method='FE')
+#' y2.rma <- rma(y2, v2, method='FE')
+#' y1.tf <- trimfill.rma(y1.rma, estimator = estimator, method.fill = 'DL') 
+#' y2.tf <- trimfill.rma(y2.rma, estimator = estimator, method.fill = 'DL') 
+#' c(y1.tf$beta, y2.tf$beta)
+#' # 2.122231 2.181333
+#' c(y1.tf$k0, y2.tf$k0)
+#' # 2 8
+#' 
+#' ## bivariate T&F method (based on galaxy plot)
+#' tf.grid <- galaxy.trimfill(y1, v1, y2, v2, n.grid = 12,  
+#'                            estimator=estimator, side='left',
+#'                            method.uni = 'FE',
+#'                            method = 'mm', 
+#'                            rho=0.5, maxiter=100, verbose=F) 
+#' tf.grid$res
+#' tf.grid$res[which(tf.grid$res$k0==max(tf.grid$res$k0)),3:5] 
+#' #     y1.f     y2.f k0
+#' # 2.053306 2.162347 14  
+#' 
+#' ## less bias by the proposed bivariate T&F method
+#' rbind(true = c(2,2),
+#'       unadjusted=c(mv_obs$coef), 
+#'       tf.uni = c(y1.tf$beta, y2.tf$beta),
+#'       tf.biv = tf.grid$res[which(tf.grid$res$k0==max(tf.grid$res$k0)),3:4])
+#' 
+#' ## unlike the univariate T&Fs, biv T&F obtains one estimate of # missing studies
+#' c(k0.true = 20,
+#'   k0.tf.uni.y1 = y1.tf$k0, 
+#'   k0.tf.uni.y2 = y2.tf$k0, 
+#'   k0.tf.biv = tf.grid$res[which(tf.grid$res$k0==max(tf.grid$res$k0)),5])
+#' # k0.true k0.tf.uni.y1 k0.tf.uni.y2    k0.tf.biv 
+#' # 20            2            8           14
+#' 
 #' @export
 galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side, rho=0, method='mm', method.uni='DL',
                             maxiter=20, var.names=c('y1', 'y2'), scale=0.02, verbose=F){
@@ -52,7 +113,8 @@ galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side,
   # y1.rma <- rma(y1, v1)$beta
   # y2.rma <- rma(y2, v2)$beta
   # y.center <- c(y1.rma$beta, y2.rma$beta)
-  y.center <- mvmeta(cbind(y1,y2), cbind(v1,v2), method=method)$coef
+  mv_obs = mvmeta(cbind(y1,y2), cbind(v1,v2), method=method)
+  y.center <- mv_obs$coef
   
   ##
   if(verbose){
@@ -100,7 +162,7 @@ galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side,
       tmp <- mvmeta(y.fill, v.fill, method=method)
       res[ig, c(3:4,7:8)] <- c(tmp$coef, sqrt(diag(tmp$vcov)))
     } else {
-      res[ig, 3:4] <- c(y.center)
+      res[ig, c(3:4,7:8)] <- c(y.center, sqrt(diag(mv_obs$vcov)))
     }
     # add side, 1=left, 0=right
     res[ig, 9] <- ifelse(tf.grid$side=='left', 1, 0)
