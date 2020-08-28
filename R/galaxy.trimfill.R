@@ -37,8 +37,8 @@
 #' @details  The bivariate T&F method assumes studies are suppressed based on a weighted sum of the two outcomes, i.e. the studies with smallest values 
 #'           of z_i = c_1 * y_1i + c_2 * y_2i, i=1,...,N  are suppressed. We use a searching algorithm to find the optimal ratio of c_1  and c_2 (i.e. a direction), 
 #'           which gives the most trimmed studies. This is based on the observation that the closer a direction is to the truth, the more studies 
-#'           are expected to be trimmed along that direction. We set a sequence of equally-spaced candidate directions with angle α_m = m*π/M, 
-#'           and (c_1, c_2) = (cos(α_m), sin(α_m)), m=1,...,M. 
+#'           are expected to be trimmed along that direction. We set a sequence of equally-spaced candidate directions with angle a_m = m*pi/M, 
+#'           and (c_1, c_2) = (cos(a_m), sin(a_m)), m=1,...,M. 
 #'          
 #' @references Luo C, Marks-Anglin AK, Duan R, Lin L, Hong C, Chu H, Chen Y. Accounting for small-study effects 
 #'                using a bivariate trim and fill meta-analysis procedure. medRxiv. 2020 Jan 1.

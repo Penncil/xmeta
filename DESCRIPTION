@@ -1,14 +1,14 @@
 Package: xmeta
 Type: Package
 Title: A Toolbox for Multivariate Meta-Analysis
-Version: 1.1-5
-Date: 2019-10-30
+Version: 1.1-6
+Date: 2020-09-01
 Authors@R: c(person("Yong", "Chen", role=c("aut", "cre"),
                      email ="ychen123@upenn.edu"),
 		     person("Chuan", "Hong", role="aut"),
 			 person("Haitao", "Chu", role="ctb"),
 			 person("Yulun", "Liu", role="ctb"))
-Imports: plotrix, aod, glmmML, numDeriv, metafor, mvmeta, stats
+Imports: plotrix, aod, glmmML, numDeriv, metafor, mvmeta, stats, MASS
 Description: A toolbox for meta-analysis. This package includes a collection of functions for (1) implementing robust multivariate meta-analysis of continuous or binary outcomes; and (2) a bivariate Egger's test for detecting small study effects.
 Depends: R (>= 3.0.0)
 License: GPL (>= 2)
@@ -18,8 +18,10 @@ Author: Yong Chen [aut, cre],
   Chuan Hong [aut],
   Haitao Chu [ctb],
   Yulun Liu [ctb]
-Maintainer: Yong Chen <ychen123@upenn.edu>
+Maintainer: Steven Vitale <svitale@upenn.edu>
 NeedsCompilation: no
 Repository: CRAN
 URL: https://github.com/ChuanHong/xmeta
 BugReports: https://github.com/ChuanHong/xmeta/issues
+Encoding: UTF-8
+RoxygenNote: 7.1.0
