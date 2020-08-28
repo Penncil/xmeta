@@ -2,7 +2,7 @@
 \alias{summary.msset}
 \title{Summarize the objects \code{msset}}
 \description{
-    Summary a model of class \code{msset} fitted by \code{msset}.
+    Summarize a model of class \code{msset} fitted by \code{msset}.
 }
 \usage{
       \method{summary}{msset}(object,...) 

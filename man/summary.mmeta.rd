@@ -2,7 +2,7 @@
 \alias{summary.mmeta}
 \title{Summarize the objects \code{mmeta}}
 \description{
-    Summary a model of class \code{mmeta} fitted by \code{mmeta}.
+    Summarize a model of class \code{mmeta} fitted by \code{mmeta}.
 }
 \usage{
       \method{summary}{mmeta}(object,...) 
