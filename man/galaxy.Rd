@@ -25,7 +25,7 @@ The galaxy plot is an intuitive visualization tool that can aid in interpretatio
 \value{
 \code{res} returns the galaxy plot.
 }
-\references{Chuan Hong, Rui Duan, Lingzhen Zeng, Rebecca A Hubbard, Thomas Lumley, Richard Riley, Haitao Chu, Stephen E Kimmel and Yong Chen. (2020). Galaxy Plot: A New Visualization Tool of Bivariate Meta-Analysis Studies, American Journal of Epidemiology, https://doi.org/10.1093/aje/kwz286.
+\references{Hong, C., Duan, R., Zeng, L., Hubbard, R., Lumley, T., Riley, R., Chu, H., Kimmel, S., and Chen, Y. (2020) Galaxy Plot: A New Visualization Tool of Bivariate Meta-Analysis Studies, American Journal of Epidemiology, https://doi.org/10.1093/aje/kwz286.
 }
 \author{Chuan Hong, Yong Chen}
 
