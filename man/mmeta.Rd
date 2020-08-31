@@ -159,7 +159,8 @@ Chen, Y., Cai, Y., Hong, C. and Jackson, D. (2015). Inference for correlated eff
 Chen, Y., Liu, Y., Ning, J., Cormier J. and Chu H. (2014). A hybrid model for combining case-control and cohort studies in systematic reviews of diagnostic tests, Journal
 of the Royal Statistical Society: Series C (Applied Statistics) 64.3 (2015): 469-489.
 
-Chen, Y., Liu, Y., Chu, H., Lee, M. and Schmid C. (2015). A simple and robust method for multivariate meta-analysis of diagnostic test accuracy, Statistics in Medicine (under revision). 
+Chen, Y., Liu, Y., Chu, H., Lee, M. and Schmid, C. (2017) A simple and robust method for multivariate meta-analysis of diagnostic test accuracy, Statistics in Medicine, 36, 105-121.
+
 }
 \author{Yong Chen, Yulun Liu}
 	

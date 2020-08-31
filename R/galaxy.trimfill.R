@@ -7,8 +7,9 @@
 #' @title Bivariate trim&fill method
 #' 
 #' @description  Bivariate T&F method accounting for small-study effects in bivariate meta-analysis, based on symmetry of the galaxy plot.
-#' @usage galaxy.trimfill(y1, v1, y2, v2, n.grid = 12, angle, estimator=c('R0', 'L0', 'Q0'), side, rho=0, center.true = NULL,
-#'                        var.names=c('y1', 'y2'), maxiter=20, method='mm', method.uni='DL', scale=0.02, verbose=F)
+#' @usage galaxy.trimfill(y1, v1, y2, v2, n.grid = 12, angle, estimator=c('R0', 'L0', 'Q0'),
+#  side, rho=0, center.true = NULL, var.names=c('y1', 'y2'), maxiter=20, 
+#  method='mm', method.uni='DL', scale=0.02, verbose=F)
 #' @author Chongliang Luo, Yong Chen
 #' 
 #' @param y1 vector of the effect size estimates of the first outcome
