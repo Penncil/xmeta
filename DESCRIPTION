@@ -2,7 +2,7 @@ Package: xmeta
 Type: Package
 Title: A Toolbox for Multivariate Meta-Analysis
 Version: 1.1-6
-Date: 2020-09-01
+Date: 2020-09-02
 Authors@R: c(person("Yong", "Chen", role=c("aut", "cre"),
                      email ="ychen123@upenn.edu"),
 		     person("Chuan", "Hong", role="aut"),
@@ -21,7 +21,7 @@ Author: Yong Chen [aut, cre],
 Maintainer: Steven Vitale <svitale@upenn.edu>
 NeedsCompilation: no
 Repository: CRAN
-URL: https://github.com/ChuanHong/xmeta
-BugReports: https://github.com/ChuanHong/xmeta/issues
+URL: https://github.com/Penncil/xmeta
+BugReports: https://github.com/Penncil/xmeta/issues
 Encoding: UTF-8
 RoxygenNote: 7.1.0
