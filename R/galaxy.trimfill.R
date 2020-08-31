@@ -9,7 +9,7 @@
 #' @description  Bivariate T&F method accounting for small-study effects in bivariate meta-analysis, based on symmetry of the galaxy plot.
 #' @usage galaxy.trimfill(y1, v1, y2, v2, n.grid = 12, angle, estimator=c('R0', 'L0', 'Q0'),
 #  side, rho=0, center.true = NULL, var.names=c('y1', 'y2'), maxiter=20, 
-#  method='mm', method.uni='DL', scale=0.02, verbose=F)
+#  method='mm', method.uni='DL', scale=0.02, verbose=FALSE)
 #' @author Chongliang Luo, Yong Chen
 #' 
 #' @param y1 vector of the effect size estimates of the first outcome
@@ -85,7 +85,7 @@
 #'                            estimator=estimator, side='left',
 #'                            method.uni = 'FE',
 #'                            method = 'mm', 
-#'                            rho=0.5, maxiter=100, verbose=F) 
+#'                            rho=0.5, maxiter=100, verbose=FALSE) 
 #' tf.grid$res
 #' tf.grid$res[which(tf.grid$res$k0==max(tf.grid$res$k0)),3:5] 
 #' #     y1.f     y2.f k0
@@ -361,7 +361,7 @@ dat.gen <- function(m.o, m.m,
                     s.min=0.01,
                     m.m.o=0,      # allow m.m.o of the left-most m.m studies to be observed
                     s2.dist = 2,  # s2 dist: 1=runif, 2=runif^2, 3=runif^4, 4=rnorm(s.m, s.min)^2
-                    verbose=F,
+                    verbose=FALSE,
                     scale=0.02){  
   m <- m.o+m.m          # total SS = observed + missing (suppressed)
   n.m.o <- m.m * m.m.o
