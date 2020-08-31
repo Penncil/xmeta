@@ -56,7 +56,7 @@
 #'                   tau.sq=c(0.1, 0.1),   # true between-study var
 #'                   rho.w=0.5, rho.b=0.5, # true within-study and between-study corr
 #'                   s.min = 0.1,          # s1i ~ Unif(s.min, 2*s.m[1]-s.min) 
-#'                   verbose = T)
+#'                   verbose = TRUE)
 #' 
 #' y1 <- mydata$mydat.sps$y1
 #' y2 <- mydata$mydat.sps$y2
@@ -107,7 +107,7 @@
 #' 
 #' @export
 galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side, rho=0, method='mm', method.uni='DL',
-                            maxiter=20, var.names=c('y1', 'y2'), scale=0.02, verbose=F){
+                            maxiter=20, var.names=c('y1', 'y2'), scale=0.02, verbose=FALSE){
   k <- length(y1)
   
   ## calculate initial mean est
