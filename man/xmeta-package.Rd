@@ -40,10 +40,12 @@ Different estimators with and without the knowledge of within study correlation 
 The score test for detecting small study effects in MMA when the within-study correlations are unknown is implemented in the function \code{\link{msset}}. 
 }
 \author{
-Yong Chen \cr
 Chuan Hong \cr
 Chongliang Luo \cr
-Maintainer: Yong Chen <ychen123@upenn.edu>
+Rui Duan \cr
+Jiayi Tong \cr
+Yong Chen \cr
+Maintainer: Jiayi Tong <Jiayi.Tong@pennmedicine.upenn.edu>
 Contributor: Haitao Chu, Yulun Liu
 }
 

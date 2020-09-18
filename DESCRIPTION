@@ -3,27 +3,31 @@ Type: Package
 Title: A Toolbox for Multivariate Meta-Analysis
 Version: 1.2-1
 Date: 2020-09-18
-Authors@R: c(person("Yong", "Chen", role=c("aut", "cre"),
-                     email ="ychen123@upenn.edu"),
-		     person("Chuan", "Hong", role="aut"),
+Authors@R: c(person("Chuan", "Hong", role="aut"),
 		     person("Chongliang", "Luo", role="aut"),
-			 person("Haitao", "Chu", role="ctb"),
-			 person("Yulun", "Liu", role="ctb"))
+			person("Rui", "Duan", role = "aut"),
+			person("Jiayi", "Tong", role = c("aut","cre"),
+				email ="Jiayi.Tong@pennmedicine.upenn.edu"),
+			person("Haitao", "Chu", role="ctb"),
+			 person("Yulun", "Liu", role="ctb"),
+			person("Yong", "Chen", role="aut"))
 Imports: plotrix, aod, glmmML, numDeriv, metafor, mvmeta, stats, MASS
 Description: A toolbox for meta-analysis. This package includes a collection of functions for (1) implementing robust multivariate meta-analysis of continuous or binary outcomes; and (2) a bivariate Egger's test for detecting small study effects.
 Depends: R (>= 3.0.0)
 License: GPL (>= 2)
 LazyLoad: no
-Packaged: 2020-09-18 15:00:00 EST; ch263
-Author: Yong Chen [aut, cre],
-  Chuan Hong [aut],
-  Chongliang Luo [aut],
-  Haitao Chu [ctb],
-  Yulun Liu [ctb]
-Maintainer: Yong Chen <ychen123@upenn.edu>
+Packaged: 2020-09-18 22:21:04 UTC; jiayito
+Author: Chuan Hong [aut],
+        Chongliang Luo [aut],
+    		Rui Duan [aut],
+		Jiayi Tong [aut, cre],
+ 		Haitao Chu [ctb],
+  		Yulun Liu [ctb],
+		Yong Chen [aut]
+Maintainer: Jiayi Tong <Jiayi.Tong@pennmedicine.upenn.edu>
 NeedsCompilation: no
 Repository: CRAN
 URL: https://github.com/Penncil/xmeta
 BugReports: https://github.com/Penncil/xmeta/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
