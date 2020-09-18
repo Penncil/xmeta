@@ -3,13 +3,8 @@
 #' @import MASS
 #' @import metafor
 #' @import mvmeta 
-#' @import plotrix
 #' @title Bivariate trim&fill method
-#' 
 #' @description  Bivariate T&F method accounting for small-study effects in bivariate meta-analysis, based on symmetry of the galaxy plot.
-#' @usage galaxy.trimfill(y1, v1, y2, v2, n.grid = 12, angle, estimator=c('R0', 'L0', 'Q0'),
-#  side, rho=0, center.true = NULL, var.names=c('y1', 'y2'), maxiter=20, 
-#  method='mm', method.uni='DL', scale=0.02, verbose=FALSE)
 #' @author Chongliang Luo, Yong Chen
 #' 
 #' @param y1 vector of the effect size estimates of the first outcome
@@ -51,7 +46,7 @@
 #' set.seed(123)
 #' mydata <- dat.gen(m.o=50, m.m=20,       # # observed studies, # missing studies
 #'                   s.m= c(0.5, 0.5),     #  c(mean(s1), mean(s2))
-#'                   a.sps=1, b.sps=1, sps='3', # suppress line direction 
+#'                   angle.LC = pi/4,      # suppress line direction 
 #'                   mybeta=c(2,2),        # true effect size
 #'                   tau.sq=c(0.1, 0.1),   # true between-study var
 #'                   rho.w=0.5, rho.b=0.5, # true within-study and between-study corr
@@ -129,9 +124,7 @@ galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side,
     text(y.center[1], y.center[2], '*', col=0+2, cex=3)
     text(min(y1)*0.3+max(y1)*0.7, ylim[1]+(ylim[2]-ylim[1])*(0.99-0*0.03), 
          paste(round(y.center[1],3), round(y.center[2],3)), col=0+2)  # 'iter =', 0, ', k0 =', 0, 
-    
-    # if(!is.null(center.true))
-    #   text(center.true[1], center.true[2], '#', col=0+3, cex=2)
+ 
   }
   
   # the Linear Combination of (y1, y2) along the n.grid projection lines
@@ -176,15 +169,15 @@ galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side,
     text(min(y1)*0.3+max(y1)*0.7, ylim[1]+(ylim[2]-ylim[1])*(0.9), paste(estimator, ', max # trimmed= ', max(res[,5])) )
     abline(0, tan(angle.max+0.0001), lty='dashed' )
     text(res[i.max, 3], res[i.max, 4], '+', col=0+4, cex=3)
-    text(min(y1)*0.3+max(y1)*0.7, ylim[1]+(ylim[2]-ylim[1])*(0.8), paste(round(center.true[1],3), round(center.true[2],3)), col='green')
-    text(min(y1)*0.3+max(y1)*0.7, ylim[1]+(ylim[2]-ylim[1])*(0.75), paste(round(res[i.max,3],3), round(res[i.max,4],3)), col='blue')
-    if(is.null(center.true)){
+    # text(min(y1)*0.3+max(y1)*0.7, ylim[1]+(ylim[2]-ylim[1])*(0.8), paste(round(center.true[1],3), round(center.true[2],3)), col='green')
+    # text(min(y1)*0.3+max(y1)*0.7, ylim[1]+(ylim[2]-ylim[1])*(0.75), paste(round(res[i.max,3],3), round(res[i.max,4],3)), col='blue')
+    # if(is.null(center.true)){
       ll = c('* obs', '+ T&F')
       cc = c(2,4)
-    }else{
-      ll = c('* obs', '# true', '+ T&F')
-      cc = c(2:4)
-    }
+    # }else{
+      # ll = c('* obs', '# true', '+ T&F')
+      # cc = c(2:4)
+    # }
     
     legend('topleft', legend=ll, col=cc)
   }
@@ -193,12 +186,29 @@ galaxy.trimfill <- function(y1, v1, y2, v2, n.grid = 12, angle, estimator, side,
 }
 
 
-## modified metafor::trimfill.rma.uni to avoid the invalid sqrt in k0 calculation when estimator == "Q0"
+#' @import metafor
+#' @title Trim&fill method for univariate meta analysis
+#' 
+#' @description  Modified metafor::trimfill.rma.uni to avoid the invalid sqrt in k0 calculation when estimator == "Q0"
+#' @author Chongliang Luo, Yong Chen
+#' 
+#' @param x an object of class "rma.uni".  
+#' @param side   the same as in metafor::trimfill
+#' @param estimator the same as in metafor::trimfill
+#' @param maxiter the same as in metafor::trimfill
+#' @param method.trim the model used in rma.uni() for estimating the center when trimming studies, default is x$method
+#' @param method.fill the model used in rma.uni() for estimating the center after filling studies, default is x$method
+#' @param verbose  the same as in metafor::trimfill 
+#' @param ilim limits for the imputed values as in metafor::trimfill. If unspecified, no limits are used. 
+#' @return  the same as in metafor::trimfill
+#' @details  It is recommend using fixed-effects for method.trim and random-effects for method.fill when heterogeneity exists.
+#'          
+#' @export
 trimfill.rma <- function (x, side, estimator = "L0", maxiter = 100, method.trim=NULL, 
-                               method.fill=NULL, pseudo=F, Tn.coef=2, 
-                               verbose = FALSE, ilim, ...) {
+                          method.fill=NULL,verbose = FALSE, ilim) {
   if(is.null(method.trim)) method.trim <- x$method
   if(is.null(method.fill)) method.fill <- x$method
+  Tn.coef=2
   
   if (missing(side)) 
     side <- NULL
@@ -210,7 +220,7 @@ trimfill.rma <- function (x, side, estimator = "L0", maxiter = 100, method.trim=
   vi <- x$vi
   wi <- x$weights
   ni <- x$ni
-  res <- suppressWarnings(rma.uni(yi, vi, weights = wi, mods = sqrt(vi), method = 'DL', weighted = x$weighted, ...))
+  res <- suppressWarnings(rma.uni(yi, vi, weights = wi, mods = sqrt(vi), method = 'DL', weighted = x$weighted))
   tau2 <- res$tau2
   if (is.null(side)) {
     if (res$beta[2] < 0) {
@@ -246,15 +256,11 @@ trimfill.rma <- function (x, side, estimator = "L0", maxiter = 100, method.trim=
     vi.t <- vi[seq_len(k - k0)]
     wi.t <- wi[seq_len(k - k0)]
     res <- suppressWarnings(rma.uni(yi.t, vi.t, weights = wi.t, 
-                                    method = method.trim, weighted = x$weighted, ...))
+                                    method = method.trim, weighted = x$weighted))
     beta <- c(res$beta)
     yi.c <- yi - beta
-    
-    if(pseudo==T){
-      yi.cp <- yi.c * sqrt(vi / (vi + tau2))
-    }else{ 
-      yi.cp <- yi.c
-    }
+ 
+    yi.cp <- yi.c
     
     yi.c.r <- rank(abs(yi.cp), ties.method = "first")
     yi.c.r.s <- sign(yi.cp) * yi.c.r
@@ -303,8 +309,7 @@ trimfill.rma <- function (x, side, estimator = "L0", maxiter = 100, method.trim=
     ni.fill <- c(x$ni.f, ni[(k - k0 + 1):k])
     attr(yi.fill, "measure") <- x$measure
     res <- suppressWarnings(rma.uni(yi.fill, vi.fill, weights = wi.fill, 
-                                    ni = ni.fill, method = method.fill, weighted = x$weighted, 
-                                    ...))
+                                    ni = ni.fill, method = method.fill, weighted = x$weighted ))
     res$fill <- c(rep(FALSE, x$k.f), rep(TRUE, k0))
     res$ids <- c(x$ids, (max(x$ids) + 1):(max(x$ids) + k0))
     if (x$slab.null) {
@@ -335,35 +340,44 @@ trimfill.rma <- function (x, side, estimator = "L0", maxiter = 100, method.trim=
   return( res) 
 }
 
+ 
 
 
-plot.galaxy <- function(y1,y2,v1,v2, published, main, xlab, ylab, scale=0.04){
-  plot(y2 ~ y1, pch=ifelse(published, '.', '*'), main=main, xlab=xlab, ylab=ylab)
-  s1=sqrt(v1)
-  s2=sqrt(v2)
-  plotrix::draw.ellipse(x=y1, y=y2, 
-                        a =  (max(s1) / s1)*scale, 
-                        b =  (max(s2) / s2)*scale, angle = 0)
-  # text(mybeta[1], mybeta[2], '*', col=0+2)
-}
-
-
-
-
-dat.gen <- function(m.o, m.m,  
-                    s.m,               # par for within-study var, = c(s1.m, s2.m)
-                    a.sps, b.sps, sps,  # direction of suppressing line, assume the most left side pts are suppressed
-                    angle.LC = pi/4,
-                    mybeta,             # mean effect size
-                    tau.sq,             # between-study var, tau.sq <- c(tau.sq[1], tau.sq[2])
+#' @import MASS
+#' @title Generate  bivariate meta analysis studies
+#' @description  Generate  bivariate meta analysis studies based on random-effects model, 
+#'               some studies with smallest weighted sum of the two outcomes are suppressed.
+#' @author Chongliang Luo, Yong Chen
+#' 
+#' @param m.o number of observed studies 
+#' @param m.m number of missing / suppressed studies 
+#' @param s.m vector of the mean of the variances of the two outcomes
+#' @param angle.LC  direction of suppressing line, default is pi/4, i.e. the studies on the left bottom corner are missing
+#' @param mybeta  the true center of the effect sizes  
+#' @param tau.sq  between-study variance, the larger it is the more heterogeneity.
+#' @param rho.w  within-study correlation of the two outcomes
+#' @param rho.b  between-study correlation of the two outcomes
+#' @param s.min  minimum of the variances of the outcomes, default is 0.01
+#' @param m.m.o  number of studies on one side of the suppressing line been observed, 
+#'               i.e. non-deterministic suppressing, default is 0, i.e. deterministic suppressing
+#' @param s2.dist options for generating the outcomes' variances. 1=runif, 2=runif^2, 3=runif^4, 4=rnorm 
+#' @param verbose logical, galaxy plot the studies? Default FALSE
+#' @param scale  The scale of the ellipse axes, see galaxy()
+#' @references Luo C, Marks-Anglin AK, Duan R, Lin L, Hong C, Chu H, Chen Y. Accounting for small-study effects 
+#'                using a bivariate trim and fill meta-analysis procedure. medRxiv. 2020 Jan 1.
+#' @export
+dat.gen <- function(m.o, m.m, s.m, angle.LC = pi/4,
+                    mybeta,             
+                    tau.sq,             
                     rho.w,
                     rho.b,
                     s.min=0.01,
-                    m.m.o=0,      # allow m.m.o of the left-most m.m studies to be observed
-                    s2.dist = 2,  # s2 dist: 1=runif, 2=runif^2, 3=runif^4, 4=rnorm(s.m, s.min)^2
-                    verbose=FALSE,
+                    m.m.o=0,      
+                    s2.dist = 2,  
+                    verbose=F,
                     scale=0.02){  
-  m <- m.o+m.m          # total SS = observed + missing (suppressed)
+  # total SS = observed + missing (suppressed)
+  m <- m.o+m.m          
   n.m.o <- m.m * m.m.o
   # s1.sq <- runif(m, s1.m*0.1, s1.m*1.9); s2.sq <- runif(m, s2.m*0.1, s2.m*1.9);
   s1.m <- s.m[1]; s2.m <- s.m[2]; 
@@ -385,7 +399,7 @@ dat.gen <- function(m.o, m.m,
   }else if(s2.dist==3){
     s1.sq <- runif(m, s.min, 2*s1.m-s.min)^4
     s2.sq <- runif(m, s.min, 2*s2.m-s.min)^4
-  }else if(s2.dist==3){
+  }else if(s2.dist==4){
     s1.sq <- rnorm(m, s1.m, s.min)^2
     s2.sq <- rnorm(m, s2.m, s.min)^2
   }
@@ -398,7 +412,7 @@ dat.gen <- function(m.o, m.m,
   }
   y1=y[,1]
   y2=y[,2]
-
+  
   a.sps <- cos(angle.LC+0.0001)
   b.sps <- sin(angle.LC+0.0001)
   ##suppress by y1
@@ -414,13 +428,14 @@ dat.gen <- function(m.o, m.m,
   y.sps.mvmeta <- list()
   
   if(verbose){
-    y.mvmeta <- mvmeta(cbind(y1,y2), cbind(s1.sq,s2.sq), data=mydat, method = "mm")
-    y.sps.mvmeta <- mvmeta(cbind(y1,y2), cbind(s1.sq,s2.sq), data=mydat.sps, method = "mm")
-
-    plot.galaxy(mydat$y1,mydat$y2,mydat$s1.sq,mydat$s2.sq, c(1:m)%in% mydat.sps$id, # mydat$LC.sps>LC.cut, 
-                main=paste0('# studies = ', m.o, '+', m.m), xlab='y1', ylab='y2', scale=scale)
-    text(y.mvmeta$coef[1], y.mvmeta$coef[2], '#', col=1, cex=2)
-    text(y.sps.mvmeta$coef[1], y.sps.mvmeta$coef[2], '*', col=2, cex=2)
+    # y.mvmeta <- mvmeta(cbind(y1,y2), cbind(s1.sq,s2.sq), data=mydat, method = "mm")
+    # y.sps.mvmeta <- mvmeta(cbind(y1,y2), cbind(s1.sq,s2.sq), data=mydat.sps, method = "mm")
+    # plot.galaxy(mydat$y1,mydat$y2,mydat$s1.sq,mydat$s2.sq, c(1:m)%in% mydat.sps$id, # mydat$LC.sps>LC.cut, 
+    #             main=paste0('# studies = ', m.o, '+', m.m), xlab='y1', ylab='y2', scale=scale)
+    # text(y.mvmeta$coef[1], y.mvmeta$coef[2], '#', col=1, cex=2)
+    # text(y.sps.mvmeta$coef[1], y.sps.mvmeta$coef[2], '*', col=2, cex=2)
+    tmp_dat = data.frame(y1=y1, s1=sqrt(s1.sq), y2=y2, s2=sqrt(s2.sq))
+    myplot = galaxy(data=tmp_dat, nm.y1="y1", nm.s1="s1", nm.y2="y2", nm.s2="s2", scale=scale)
     abline(LC.cut / sin(angle.LC+0.0001), -1/tan(angle.LC+0.0001))
   }
   return(list(mydat=mydat, mydat.sps=mydat.sps, y.sps.mvmeta=y.sps.mvmeta, y.mvmeta=y.mvmeta, LC.cut=LC.cut))

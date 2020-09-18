@@ -1,11 +1,12 @@
 Package: xmeta
 Type: Package
 Title: A Toolbox for Multivariate Meta-Analysis
-Version: 1.1-6
-Date: 2020-09-02
+Version: 1.2-1
+Date: 2020-09-18
 Authors@R: c(person("Yong", "Chen", role=c("aut", "cre"),
                      email ="ychen123@upenn.edu"),
 		     person("Chuan", "Hong", role="aut"),
+		     person("Chongliang", "Luo", role="aut"),
 			 person("Haitao", "Chu", role="ctb"),
 			 person("Yulun", "Liu", role="ctb"))
 Imports: plotrix, aod, glmmML, numDeriv, metafor, mvmeta, stats, MASS
@@ -13,12 +14,13 @@ Description: A toolbox for meta-analysis. This package includes a collection of 
 Depends: R (>= 3.0.0)
 License: GPL (>= 2)
 LazyLoad: no
-Packaged: 2019-10-30 15:00:00 EST; ch263
+Packaged: 2020-09-18 15:00:00 EST; ch263
 Author: Yong Chen [aut, cre],
   Chuan Hong [aut],
+  Chongliang Luo [aut],
   Haitao Chu [ctb],
   Yulun Liu [ctb]
-Maintainer: Steven Vitale <svitale@upenn.edu>
+Maintainer: Yong Chen <ychen123@upenn.edu>
 NeedsCompilation: no
 Repository: CRAN
 URL: https://github.com/Penncil/xmeta

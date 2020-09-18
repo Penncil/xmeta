@@ -42,7 +42,8 @@ The score test for detecting small study effects in MMA when the within-study co
 \author{
 Yong Chen \cr
 Chuan Hong \cr
-Maintainer: Steven Vitale <svitale@upenn.edu>
+Chongliang Luo \cr
+Maintainer: Yong Chen <ychen123@upenn.edu>
 Contributor: Haitao Chu, Yulun Liu
 }
 
