@@ -12,8 +12,8 @@ The package \pkg{xmeta} consists of a collection of functions for making inferen
 \tabular{ll}{
 Package: \tab xmeta\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2019-10-30\cr
+Version: \tab 1.3-0\cr
+Date: \tab 2021-01-31\cr
 License: GPL>=2 \cr
 }
 }
@@ -39,14 +39,25 @@ Different estimators with and without the knowledge of within study correlation 
 \section{Small study effects}{Detecting and accounting for small study effects are challenging in MMA setting. The multivariate nature is often not fully accounted for by the existing univariate methods. 
 The score test for detecting small study effects in MMA when the within-study correlations are unknown is implemented in the function \code{\link{msset}}. 
 }
+
+\section{Galaxy Plot}{A New Visualization Tool of Bivariate Meta-Analysis Studies. This function \code{\link{galaxy}} returns the galaxy plot to visualize bivariate meta-analysis data, which faithfully retains the information in two separate funnel plots, while providing 
+useful insights into outcome correlations, between-study heterogeneity and joint asymmetry. 
+Galaxy plot is the counterpart of the funnel plot in the multivariate setting. 
+The galaxy plot is an intuitive visualization tool that can aid in interpretation 
+of results of multivariate meta-analysis. It preserves all of the information presented 
+by separate funnel plots for each outcome while elucidating more complex features that 
+may only be revealed by examining the joint distribution of the bivariate outcomes.
+}
+
+\section{Publication bias in bivariate meta-analysis}{The function \code{\link{galaxy.trimfill}} implements a bivariate T&F method accounting for publication bias in bivariate meta-analysis, based on symmetry of the galaxy plot. The bivariate T&F method assumes studies are suppressed based on a weighted sum of the two outcomes. 
+We use a searching algorithm to find the optimal direction which gives the most trimmed studies. This is based on the observation that the closer a direction is 
+to the truth, the more studies are expected to be trimmed along that direction.   
+}
+
 \author{
-Chuan Hong \cr
-Chongliang Luo \cr
-Rui Duan \cr
-Jiayi Tong \cr
-Yong Chen \cr
+Author: Chuan Hong, Chongliang Luo, Jiayi Tong, Yong Chen
 Maintainer: Jiayi Tong <Jiayi.Tong@pennmedicine.upenn.edu>
-Contributor: Haitao Chu, Yulun Liu
+Contributor: Rui Duan, Haitao Chu, Yulun Liu 
 }
 
 \keyword{package}

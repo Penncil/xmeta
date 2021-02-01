@@ -1,29 +1,30 @@
 Package: xmeta
 Type: Package
 Title: A Toolbox for Multivariate Meta-Analysis
-Version: 1.2-1
-Date: 2020-09-18
+Version: 1.3-0
+Date: 2021-01-31
 Authors@R: c(person("Chuan", "Hong", role="aut"),
-		     person("Chongliang", "Luo", role="aut"),
-			person("Rui", "Duan", role = "aut"),
-			person("Jiayi", "Tong", role = c("aut","cre"),
-				email ="Jiayi.Tong@pennmedicine.upenn.edu"),
-			person("Haitao", "Chu", role="ctb"),
-			 person("Yulun", "Liu", role="ctb"),
-			person("Yong", "Chen", role="aut"))
+            person("Chongliang", "Luo", role="aut"),
+            person("Jiayi", "Tong", role=c("aut", "cre"), 
+                    email="Jiayi.Tong@pennmedicine.upenn.edu"),
+            person("Rui", "Duan", role="ctb"),
+            person("Haitao", "Chu", role="ctb"),
+			      person("Yulun", "Liu", role="ctb"),
+            person("Yong", "Chen", role=c("aut"),
+                     email ="ychen123@upenn.edu"))
 Imports: plotrix, aod, glmmML, numDeriv, metafor, mvmeta, stats, MASS
-Description: A toolbox for meta-analysis. This package includes a collection of functions for (1) implementing robust multivariate meta-analysis of continuous or binary outcomes; and (2) a bivariate Egger's test for detecting small study effects.
-Depends: R (>= 3.0.0)
+Description: A toolbox for meta-analysis. This package includes (1) a robust multivariate meta-analysis of continuous or binary outcomes; (2) a bivariate Egger's test for detecting small study effects; (3) Galaxy Plot: A New Visualization Tool of Bivariate Meta-Analysis Studies; and (4) a bivariate T&F method accounting for publication bias in bivariate meta-analysis, based on symmetry of the galaxy plot.
+Depends: R (>= 3.5.0)
 License: GPL (>= 2)
 LazyLoad: no
-Packaged: 2020-09-18 22:21:04 UTC; jiayito
+Packaged: 2021-01-31 15:00:00 EST; chl18019
 Author: Chuan Hong [aut],
-        Chongliang Luo [aut],
-    		Rui Duan [aut],
-		Jiayi Tong [aut, cre],
- 		Haitao Chu [ctb],
-  		Yulun Liu [ctb],
-		Yong Chen [aut]
+  Chongliang Luo [aut],
+  Jiayi Tong [aut, cre],
+  Rui Duan [ctb],
+  Haitao Chu [ctb],
+  Yulun Liu [ctb],
+  Yong Chen [aut]
 Maintainer: Jiayi Tong <Jiayi.Tong@pennmedicine.upenn.edu>
 NeedsCompilation: no
 Repository: CRAN

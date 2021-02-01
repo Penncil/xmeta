@@ -11,11 +11,13 @@
 \format{
   The data frame contains the following columns:
   \describe{
+    \item{study.id}{study id}
     \item{y1}{effect size for the first outcome}
     \item{s1}{within-study standard error for the first outcome}
     \item{y2}{effect size for the second outcome}
     \item{s2}{within-study stamdard error for the second outcome}
-
+    \item{corr}{within-study correlation}
+    \item{subgroup}{subgroup of the studies}
   }
 }
 
@@ -26,7 +28,6 @@ The dataset \code{sim_dat} is used to illustrate the galaxy plot.
 
 
 \seealso{
-  \code{\link{galaxy}},
   \code{\link{galaxy}}
 }
 

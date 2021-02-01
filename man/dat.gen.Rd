@@ -16,8 +16,7 @@ dat.gen(
   s.min = 0.01,
   m.m.o = 0,
   s2.dist = 2,
-  verbose = F,
-  scale = 0.02
+  verbose = F
 )
 }
 \arguments{
@@ -45,8 +44,6 @@ i.e. non-deterministic suppressing, default is 0, i.e. deterministic suppressing
 \item{s2.dist}{options for generating the outcomes' variances. 1=runif, 2=runif^2, 3=runif^4, 4=rnorm}
 
 \item{verbose}{logical, galaxy plot the studies? Default FALSE}
-
-\item{scale}{The scale of the ellipse axes, see galaxy()}
 }
 \description{
 Generate  bivariate meta analysis studies based on random-effects model, 

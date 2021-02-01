@@ -75,7 +75,7 @@ The bivariate T&F method assumes studies are suppressed based on a weighted sum 
           and (c_1, c_2) = (cos(a_m), sin(a_m)), m=1,...,M.
 }
 \examples{
-# require(mvtnorm)
+ 
 require(MASS)
 require(mvmeta)
 require(metafor)
@@ -91,13 +91,14 @@ mydata <- dat.gen(m.o=50, m.m=20,       # # observed studies, # missing studies
 
 y1 <- mydata$mydat.sps$y1
 y2 <- mydata$mydat.sps$y2
-v1 <- mydata$mydat.sps$s1.sq
-v2 <- mydata$mydat.sps$s2.sq
+v1 <- mydata$mydat.sps$s1^2
+v2 <- mydata$mydat.sps$s2^2
 
 ## unadjusted est 
 mv_obs <- mvmeta(cbind(y1, y2), cbind(v1, v2), method='mm')
 c(mv_obs$coef)
 # 2.142687 2.237741
+
 estimator <- 'R0' 
 ## univariate T&F based on y1 or y2
 y1.rma <- rma(y1, v1, method='FE')

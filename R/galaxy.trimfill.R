@@ -38,8 +38,7 @@
 #'          
 #' @references Luo C, Marks-Anglin AK, Duan R, Lin L, Hong C, Chu H, Chen Y. Accounting for small-study effects 
 #'                using a bivariate trim and fill meta-analysis procedure. medRxiv. 2020 Jan 1.
-#' @examples 
-#' # require(mvtnorm)
+#' @examples  
 #' require(MASS)
 #' require(mvmeta)
 #' require(metafor)
@@ -55,15 +54,14 @@
 #' 
 #' y1 <- mydata$mydat.sps$y1
 #' y2 <- mydata$mydat.sps$y2
-#' v1 <- mydata$mydat.sps$s1.sq
-#' v2 <- mydata$mydat.sps$s2.sq
+#' v1 <- mydata$mydat.sps$s1^2
+#' v2 <- mydata$mydat.sps$s2^2
 #' 
 #' ## unadjusted est 
 #' mv_obs <- mvmeta(cbind(y1, y2), cbind(v1, v2), method='mm')
 #' c(mv_obs$coef)
 #' # 2.142687 2.237741
-
-
+#' 
 #' estimator <- 'R0' 
 #' ## univariate T&F based on y1 or y2
 #' y1.rma <- rma(y1, v1, method='FE')
@@ -361,8 +359,7 @@ trimfill.rma <- function (x, side, estimator = "L0", maxiter = 100, method.trim=
 #' @param m.m.o  number of studies on one side of the suppressing line been observed, 
 #'               i.e. non-deterministic suppressing, default is 0, i.e. deterministic suppressing
 #' @param s2.dist options for generating the outcomes' variances. 1=runif, 2=runif^2, 3=runif^4, 4=rnorm 
-#' @param verbose logical, galaxy plot the studies? Default FALSE
-#' @param scale  The scale of the ellipse axes, see galaxy()
+#' @param verbose logical, galaxy plot the studies? Default FALSE 
 #' @references Luo C, Marks-Anglin AK, Duan R, Lin L, Hong C, Chu H, Chen Y. Accounting for small-study effects 
 #'                using a bivariate trim and fill meta-analysis procedure. medRxiv. 2020 Jan 1.
 #' @export
@@ -373,9 +370,8 @@ dat.gen <- function(m.o, m.m, s.m, angle.LC = pi/4,
                     rho.b,
                     s.min=0.01,
                     m.m.o=0,      
-                    s2.dist = 2,  
-                    verbose=F,
-                    scale=0.02){  
+                    s2.dist = 2,
+                    verbose=F ){  
   # total SS = observed + missing (suppressed)
   m <- m.o+m.m          
   n.m.o <- m.m * m.m.o
@@ -417,7 +413,8 @@ dat.gen <- function(m.o, m.m, s.m, angle.LC = pi/4,
   b.sps <- sin(angle.LC+0.0001)
   ##suppress by y1
   LC.sps=y1*a.sps + y2*b.sps 
-  mydat = data.frame(cbind(LC.sps, y1, y2, s1.sq, s2.sq, tau1.sq, tau2.sq, rho.w, rho.b))       
+  # mydat = data.frame(cbind(LC.sps, y1, y2, s1.sq, s2.sq, tau1.sq, tau2.sq, rho.w, rho.b))
+  mydat = data.frame(LC.sps, y1, y2, s1=sqrt(s1.sq), s2=sqrt(s2.sq), tau1.sq, tau2.sq, rho.w, rho.b)
   mydat = mydat[order(mydat$LC.sps),]
   LC.cut <- (mydat$LC.sps[m.m] + mydat$LC.sps[m.m+1])/2
   
@@ -434,8 +431,8 @@ dat.gen <- function(m.o, m.m, s.m, angle.LC = pi/4,
     #             main=paste0('# studies = ', m.o, '+', m.m), xlab='y1', ylab='y2', scale=scale)
     # text(y.mvmeta$coef[1], y.mvmeta$coef[2], '#', col=1, cex=2)
     # text(y.sps.mvmeta$coef[1], y.sps.mvmeta$coef[2], '*', col=2, cex=2)
-    tmp_dat = data.frame(y1=y1, s1=sqrt(s1.sq), y2=y2, s2=sqrt(s2.sq))
-    myplot = galaxy(data=tmp_dat, nm.y1="y1", nm.s1="s1", nm.y2="y2", nm.s2="s2", scale=scale)
+    # tmp_dat = data.frame(y1=y1, s1=sqrt(s1.sq), y2=y2, s2=sqrt(s2.sq))
+    myplot = galaxy(data=mydat)
     abline(LC.cut / sin(angle.LC+0.0001), -1/tan(angle.LC+0.0001))
   }
   return(list(mydat=mydat, mydat.sps=mydat.sps, y.sps.mvmeta=y.sps.mvmeta, y.mvmeta=y.mvmeta, LC.cut=LC.cut))
