@@ -1,34 +1,37 @@
 Package: xmeta
 Type: Package
 Title: A Toolbox for Multivariate Meta-Analysis
-Version: 1.3-0
-Date: 2021-01-31
+Version: 1.3.1
+Date: 2023-04-03
 Authors@R: c(person("Chuan", "Hong", role="aut"),
             person("Chongliang", "Luo", role="aut"),
-            person("Jiayi", "Tong", role=c("aut", "cre"), 
+            person("Jiayi", "Tong", role=c("aut"), 
                     email="Jiayi.Tong@pennmedicine.upenn.edu"),
+            person("Jiajie", "Chen", role="cre",
+                    email="chenjiajiemath@gmail.com"),
             person("Rui", "Duan", role="ctb"),
             person("Haitao", "Chu", role="ctb"),
 			      person("Yulun", "Liu", role="ctb"),
             person("Yong", "Chen", role=c("aut"),
                      email ="ychen123@upenn.edu"))
 Imports: plotrix, aod, glmmML, numDeriv, metafor, mvmeta, stats, MASS
-Description: A toolbox for meta-analysis. This package includes (1) a robust multivariate meta-analysis of continuous or binary outcomes; (2) a bivariate Egger's test for detecting small study effects; (3) Galaxy Plot: A New Visualization Tool of Bivariate Meta-Analysis Studies; and (4) a bivariate T&F method accounting for publication bias in bivariate meta-analysis, based on symmetry of the galaxy plot.
+Description: A toolbox for meta-analysis. This package includes: 1,a robust multivariate meta-analysis of continuous or binary outcomes; 2, a bivariate Egger's test for detecting small study effects; 3, Galaxy Plot: A New Visualization Tool of Bivariate Meta-Analysis Studies; 4, a bivariate T&F method accounting for publication bias in bivariate meta-analysis, based on symmetry of the galaxy plot. Hong C. et al(2020) <doi:10.1093/aje/kwz286>, Chongliang L. et al(2020) <doi:10.1101/2020.07.27.20161562>.
 Depends: R (>= 3.5.0)
 License: GPL (>= 2)
 LazyLoad: no
 Packaged: 2021-01-31 15:00:00 EST; chl18019
 Author: Chuan Hong [aut],
   Chongliang Luo [aut],
-  Jiayi Tong [aut, cre],
+  Jiayi Tong [aut], 
+  Jiajie Chen [cre],
   Rui Duan [ctb],
   Haitao Chu [ctb],
   Yulun Liu [ctb],
   Yong Chen [aut]
-Maintainer: Jiayi Tong <Jiayi.Tong@pennmedicine.upenn.edu>
+Maintainer: Jiajie Chen <chenjiajiemath@gmail.com>
 NeedsCompilation: no
 Repository: CRAN
 URL: https://github.com/Penncil/xmeta
 BugReports: https://github.com/Penncil/xmeta/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
